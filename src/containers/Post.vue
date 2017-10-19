@@ -2,10 +2,8 @@
   <div>
     <h1>Posts</h1>
     <ul>
-      <li v-for='post in posts' :data-userId='post.userId' :data-id='post.id'>
-        <router-link :to="{name: 'post', params: {id: post.id}}">
-          {{post.title}}
-        </router-link>
+      <li :data-userId='post.userId' :data-id='post.id'>
+        <h3>{{post.title}}</h3>
         <p>{{post.body}}</p>
       </li>
     </ul>
@@ -16,7 +14,9 @@
 import { mapState } from 'vuex'
 
 export default {
-  data: () => ({}),
+  data: () => ({
+    post: null
+  }),
 
   computed: {
     ...mapState({
@@ -29,7 +29,7 @@ export default {
   methods: {},
 
   created () {
-    this.$store.dispatch('getPosts')
+    this.post = this.posts[this.$route.params.id - 1]
   }
 }
 </script>
