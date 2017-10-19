@@ -1,7 +1,7 @@
 {
-  "name": "vue-extansion-chrome",
+  "name": "posts-vue",
   "version": "1.0.0",
-  "description": "Bet_Extansion_Chrome",
+  "description": "git@github.com:s-kobets/posts-vue.git",
   "author": "skobets",
   "private": true,
   "scripts": {
@@ -14,6 +14,7 @@
     "watch": "webpack --config config/client.js --watch"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "vue": "^2.3.3",
     "vue-router": "^2.6.0"
   },
