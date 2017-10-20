@@ -34,8 +34,11 @@ export default {
 
   methods: {},
 
-  created () {
-    this.$store.dispatch('getPosts')
+  mounted () {
+    console.log(!this.posts.length, this.posts.length)
+    if (!this.posts.length) {
+      this.$store.dispatch('getPosts')
+    }
     this.$store.dispatch('setUser')
   }
 }

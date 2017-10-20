@@ -74,8 +74,10 @@ export default {
       if (this.event === 'edit') {
         const request = {...this.post, ...dataForm}
         this.$store.dispatch('setPost', request)
+        this.post = request
       } else {
         this.$store.dispatch('addPost', dataForm)
+        this.post.push(dataForm)
       }
       this.event = 'get'
     },
@@ -90,7 +92,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     this.post = this.posts[this.$route.params.id - 1]
   }
 }

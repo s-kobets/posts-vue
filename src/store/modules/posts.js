@@ -55,6 +55,7 @@ const mutations = {
 
   [types.SET_POST] (state, payload) {
     state.data[payload.id - 1] = payload
+    console.log(state.data[payload.id - 1])
   },
 
   [types.DELETE_POST] (state, payload) {
