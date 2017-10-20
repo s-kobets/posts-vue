@@ -1,8 +1,10 @@
 <template>
   <div>
     <h1>Posts</h1>
+    <User />
     <ul>
       <li v-for='post in posts' :data-userId='post.userId' :data-id='post.id'>
+        <span>User: {{post.userId}}</span>
         <router-link :to="{name: 'post', params: {id: post.id}}">
           {{post.title}}
         </router-link>
@@ -14,22 +16,27 @@
 
 <script>
 import { mapState } from 'vuex'
+import User from '@/components/User.vue'
 
 export default {
   data: () => ({}),
 
   computed: {
     ...mapState({
+      user: state => state.user.data,
       posts: state => state.posts.data
     })
   },
 
-  components: {},
+  components: {
+    User
+  },
 
   methods: {},
 
   created () {
     this.$store.dispatch('getPosts')
+    this.$store.dispatch('setUser')
   }
 }
 </script>

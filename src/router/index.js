@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Home = (resolve) => require(['@/containers/Home'], resolve)
+const Posts = (resolve) => require(['@/containers/Posts'], resolve)
 const Post = (resolve) => require(['@/containers/Post'], resolve)
 
 Vue.use(Router)
 
 const routes = [
-  {path: '/', component: Home},
+  {path: '/', component: Posts},
   {path: '/post/:id', name: 'post', component: Post}
 ]
 

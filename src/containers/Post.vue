@@ -1,32 +1,86 @@
 <template>
   <div>
     <h1>Posts</h1>
+    <User />
     <ul>
+      <li><a href='#' data-event='get' v-on:click='eventPost'>Get</a></li>
+      <li><a href='#' data-event='add' v-on:click='eventPost'>Add</a></li>
+      <li><a href='#' data-event='edit' v-on:click='eventPost' v-if='user.idUser === post.userId'>Edit</a></li>
+      <li><a href='#' data-event='delete' v-on:click='eventPost' v-if='user.idUser === post.userId'>Delete</a></li>
+    </ul>
+    <ul v-if="event === 'get'">
       <li :data-userId='post.userId' :data-id='post.id'>
+        <span>User: {{post.userId}}</span>
         <h3>{{post.title}}</h3>
         <p>{{post.body}}</p>
       </li>
     </ul>
+
+    <form v-else-if="event !== 'get'" v-on:submit='submitForm'>
+      <label>
+        <p>title</p>
+        <input type='text' v-if="event === 'edit'" :value='post.title' name="title"/>
+        <input type='text' v-if="event === 'add'" value='' name="title"/>
+      </label>
+      <label>
+        <p>body</p>
+        <textarea rows='10' v-if="event === 'edit'" :value='post.body' name="body"/>
+        <textarea rows='10' v-if="event === 'add'" value='' name="body"/>
+      </label>
+
+      <button type='submit'>Apply</button>
+    </form>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import User from '@/components/User.vue'
 
 export default {
   data: () => ({
-    post: null
+    post: null,
+    event: 'get'
   }),
 
   computed: {
     ...mapState({
+      user: state => state.user.data,
       posts: state => state.posts.data
     })
   },
 
-  components: {},
+  components: {
+    User
+  },
 
-  methods: {},
+  methods: {
+    getData (elements) {
+      const elementForm = {}
+      for (let i = 0; i < elements.length; i += 1) {
+        if (elements[i].name) {
+          elementForm[elements[i].name] = elements[i].value
+        }
+      }
+      return elementForm
+    },
+    submitForm (e) {
+      e.preventDefault()
+      const dataForm = this.getData(e.target.elements)
+      if (event === 'edit') {
+        const post = this.post
+        const request = {post, ...request}
+        this.$store.dispatch('setPost', request)
+      } else {
+        this.$store.dispatch('addPost', dataForm)
+      }
+    },
+    eventPost (e) {
+      e.preventDefault()
+      const eventData = e.target.getAttribute('data-event')
+      this.event = eventData
+    }
+  },
 
   created () {
     this.post = this.posts[this.$route.params.id - 1]
