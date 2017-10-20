@@ -5,6 +5,7 @@ import * as actions from './actions'
 
 import user from './modules/user'
 import posts from './modules/posts'
+import comments from './modules/comments'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
 
   modules: {
     user,
-    posts
+    posts,
+    comments
   },
 
   actions

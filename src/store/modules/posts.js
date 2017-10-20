@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import * as types from '../mutation-types'
 import api from '../api'
 // import * as getters from '../getters'
@@ -54,8 +56,7 @@ const mutations = {
   },
 
   [types.SET_POST] (state, payload) {
-    state.data[payload.id - 1] = payload
-    console.log(state.data[payload.id - 1])
+    Vue.set(state.data, payload.id - 1, payload)
   },
 
   [types.DELETE_POST] (state, payload) {

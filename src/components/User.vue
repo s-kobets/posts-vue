@@ -18,7 +18,7 @@ export default {
 
   methods: {},
 
-  created () {
+  mounted () {
     if (!this.user.idUser) {
       this.$store.dispatch('setUser')
     }

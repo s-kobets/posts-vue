@@ -35,10 +35,7 @@ export default {
   methods: {},
 
   mounted () {
-    console.log(!this.posts.length, this.posts.length)
-    if (!this.posts.length) {
-      this.$store.dispatch('getPosts')
-    }
+    this.$store.dispatch('getPosts')
     this.$store.dispatch('setUser')
   }
 }

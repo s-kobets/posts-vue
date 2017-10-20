@@ -34,14 +34,18 @@
     </div>
 
     <div v-else>Пост удален.</div>
+
+    <Comments :post='post' />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import User from '@/components/User.vue'
+import Comments from '@/components/Comments.vue'
 
 export default {
+
   data: () => ({
     post: null,
     event: 'get'
@@ -55,7 +59,8 @@ export default {
   },
 
   components: {
-    User
+    User,
+    Comments
   },
 
   methods: {
@@ -77,7 +82,6 @@ export default {
         this.post = request
       } else {
         this.$store.dispatch('addPost', dataForm)
-        this.post.push(dataForm)
       }
       this.event = 'get'
     },

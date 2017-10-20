@@ -19,11 +19,7 @@ export default {
     return axios.delete(`${serverUrl}/posts/${data.id}`, data)
   },
 
-  setWithdraw (data) {
-    return axios.put(`${serverUrl}/withdraw/${data.id}`, data)
-  },
-
-  removeWithdraw (data) {
-    return axios.put(`${serverUrl}/withdraw/${data.id}`)
+  getComments (data) {
+    return axios.get(`${serverUrl}/posts/${data.id}/comments`)
   }
 }
