@@ -15,8 +15,28 @@ const actions = {
       .catch(err => console.error(err))
   },
 
+  addPost ({ commit }, payload) {
+    api.addPost(payload)
+    .then((items) => {
+      commit(types.ADD_POST, items.data)
+    })
+    .catch(err => console.error(err))
+  },
+
   setPost ({ commit }, payload) {
-    commit(types.SET_POST, payload)
+    api.setPost(payload)
+    .then((items) => {
+      commit(types.SET_POST, payload)
+    })
+    .catch(err => console.error(err))
+  },
+
+  deletePost ({commit}, payload) {
+    api.deletePost(payload)
+    .then((items) => {
+      commit(types.DELETE_POST, items.data)
+    })
+    .catch(err => console.error(err))
   }
 }
 
@@ -30,12 +50,16 @@ const mutations = {
   },
 
   [types.ADD_POST] (state, payload) {
-    state.data.push(...payload)
+    state.data.push(payload)
   },
 
   [types.SET_POST] (state, payload) {
+    state.data[payload.id - 1] = payload
+  },
+
+  [types.DELETE_POST] (state, payload) {
     const select = payload.id
-    return state.data.filter((item, key) => item.id === select)
+    state.data = state.data.filter((item, key) => item.id !== select)
   }
 }
 

@@ -4,7 +4,7 @@
     <User />
     <ul>
       <li v-for='post in posts' :data-userId='post.userId' :data-id='post.id'>
-        <span>User: {{post.userId}}</span>
+        <span>Author: {{post.userId}}</span>
         <router-link :to="{name: 'post', params: {id: post.id}}">
           {{post.title}}
         </router-link>

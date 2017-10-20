@@ -7,8 +7,16 @@ export default {
     return axios.get(`${serverUrl}/posts`)
   },
 
-  getUserTrade (data) {
-    return axios.post(`${serverUrl}/users/options`, {url: data})
+  setPost (data) {
+    return axios.put(`${serverUrl}/posts/${data.id}`, data)
+  },
+
+  addPost (data) {
+    return axios.post(`${serverUrl}/posts`, data)
+  },
+
+  deletePost (data) {
+    return axios.delete(`${serverUrl}/posts/${data.id}`, data)
   },
 
   setWithdraw (data) {
