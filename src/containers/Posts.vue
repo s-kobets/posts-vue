@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <h1>Posts</h1>
-    <User />
-    <ul>
-      <li v-for='post in posts' :data-userId='post.userId' :data-id='post.id'>
-        <span>Author: {{post.userId}}</span>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Posts</h1>
+      <User />
+      <div class="card mb-3" v-for='post in posts' :data-userId='post.userId' :data-id='post.id'>
         <router-link :to="{name: 'post', params: {id: post.id}}">
-          {{post.title}}
+          <div class="card-header">{{post.title}}</div>
         </router-link>
-        <p>{{post.body}}</p>
-      </li>
-    </ul>
+        <div class="card-body">
+          {{post.body}}
+          <p class="card-text"><small class="text-muted">Author: {{post.userId}}</small></p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

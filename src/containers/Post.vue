@@ -1,41 +1,44 @@
 <template>
-  <div>
-    <router-link :to="{path: '/'}"><< Posts</router-link>
-    <h1>Posts</h1>
-    <User />
-    <div v-if='post'>
-      <ul>
-        <li><a href='#' data-event='get' v-on:click='eventPost'>Get</a></li>
-        <li><a href='#' data-event='add' v-on:click='eventPost'>Add</a></li>
-        <li><a href='#' data-event='edit' v-on:click='eventPost' v-if='user.idUser === post.userId'>Edit</a></li>
-        <li><a href='#' data-event='delete' v-on:click='eventPost' v-if='user.idUser === post.userId'>Delete</a></li>
-      </ul>
-      <ul v-if="event === 'get'">
-        <li :data-userId='post.userId' :data-id='post.id'>
-          <h3>{{post.title}}</h3>
-          <p>{{post.body}}</p>
-        </li>
-      </ul>
+  <div class="row">
+    <div class="col-sm-12">
+      <nav class="navbar navbar-light bg-light">
+        <router-link :to="{path: '/posts'}" class="navbar-link"><< Posts</router-link>
+      </nav>
 
-      <form v-else v-on:submit='submitForm'>
-        <label>
-          <p>title</p>
-          <input type='text' v-if="event === 'edit'" :value='post.title' name="title"/>
-          <input type='text' v-if="event === 'add'" value='' name="title"/>
-        </label>
-        <label>
-          <p>body</p>
-          <textarea rows='10' v-if="event === 'edit'" :value='post.body' name="body"/>
-          <textarea rows='10' v-if="event === 'add'" value='' name="body"/>
-        </label>
+      <h1>Post</h1>
+      <User />
+      <div v-if='post' class='bd-example'>
+        <div class='btn-group mb-3'>
+          <button type='button' data-event='get' v-on:click='eventPost' class="btn btn-primary">Get</button>
+          <button type='button' data-event='add' v-on:click='eventPost' class="btn btn-primary">Add</button>
+          <button type='button' data-event='edit' v-on:click='eventPost' v-if='user.idUser === post.userId' class="btn btn-primary">Edit</button>
+          <button type='button' data-event='delete' v-on:click='eventPost' v-if='user.idUser === post.userId' class="btn btn-primary">Delete</button>
+        </div>
 
-        <button type='submit'>Apply</button>
-      </form>
+        <div class="card mb-3" v-if="event === 'get'" :data-userId='post.userId' :data-id='post.id'>
+          <div class="card-header">{{post.title}}</div>
+          <div class="card-body">{{post.body}}</div>
+        </div>
+
+        <form v-else v-on:submit='submitForm' class='bd-example'>
+          <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type='text' v-if="event === 'edit'" :value='post.title' name="title"/>
+            <input class="form-control" type='text' v-if="event === 'add'" value='' name="title"/>
+          </div>
+          <div class="form-group">
+            <label>Body</label>
+            <textarea class="form-control" rows='10' v-if="event === 'edit'" :value='post.body' name="body"/>
+            <textarea class="form-control" rows='10' v-if="event === 'add'" value='' name="body"/>
+          </div>
+            <button type='submit' class="btn btn-primary">Apply</button>
+        </form>
+      </div>
+
+      <div v-else class="alert alert-success" role="alert">Пост удален.</div>
+
+      <Comments :post='post' />
     </div>
-
-    <div v-else>Пост удален.</div>
-
-    <Comments :post='post' />
   </div>
 </template>
 

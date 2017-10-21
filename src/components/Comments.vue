@@ -1,26 +1,28 @@
 <template>
   <div>
     <h2>Comments</h2>
-    <ul v-if='comments.length > 0'>
-      <li :data-userId='comment.userId' :data-id='comment.id' v-for='comment in comments'>
-        <h3>{{comment.name}}</h3>
-        <p>{{comment.email}}</p>
-        <p>{{comment.body}}</p>
-        <ul v-if='comment.name === userName'>
-          <li><a href='#' :data-id='comment.id' data-event='edit' v-on:click='eventComment'>Edit</a></li>
-          <li><a href='#' :data-id='comment.id' data-event='delete' v-on:click='eventComment'>Delete</a></li>
-        </ul>
-      </li>
-    </ul>
+    <div v-if='comments.length > 0'>
+      <div class="card mb-3" :data-userId='comment.userId' :data-id='comment.id' v-for='comment in comments'>
+        <div class="card-body" >
+          <strong class="card-title">{{comment.name}}</strong>
+          <p class="card-subtitle mb-2 text-muted">{{comment.email}}</p>
+          <p class="card-text">{{comment.body}}</p>
+          <div v-if='comment.name === userName'>
+            <a href='#' class="card-link" :data-id='comment.id' data-event='edit' v-on:click='eventComment'>Edit</a>
+            <a href='#' class="card-link" :data-id='comment.id' data-event='delete' v-on:click='eventComment'>Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <form v-on:submit='submitForm'>
-      <label>
-        <p>body</p>
-        <textarea rows='10' v-if="event === 'edit'" :value='editComment.body' name="body"/>
-        <textarea rows='10' v-else value='' name="body"/>
-      </label>
+    <form v-on:submit='submitForm' class='bd-example'>
+      <div class="form-group">
+        <label>Body</label>
+        <textarea class="form-control" rows='10' v-if="event === 'edit'" :value='editComment.body' name="body"/>
+        <textarea class="form-control" rows='10' v-else value='' name="body"/>
+      </div>
 
-      <button type='submit'>Apply</button>
+      <button type='submit' class="btn btn-primary">Apply</button>
     </form>
   </div>
 </template>
@@ -85,7 +87,7 @@ export default {
   },
 
   mounted () {
-    this.postId = this.$route.params.id - 1
+    this.postId = this.$route.params.id
     this.$store.dispatch('getComments', {id: this.postId})
   }
 }
