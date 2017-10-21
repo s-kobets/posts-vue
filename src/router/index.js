@@ -7,7 +7,7 @@ const Post = (resolve) => require(['@/containers/Post'], resolve)
 Vue.use(Router)
 
 const routes = [
-  {path: '/', component: Posts},
+  {path: '/posts', component: Posts},
   {path: '/post/:id', name: 'post', component: Post}
 ]
 

@@ -7,21 +7,7 @@ const ManifestPlugin = require('webpack-manifest-plugin')
 
 module.exports = merge(baseConfig, {
   plugins: [
-    new ManifestPlugin({
-      seed: {
-        manifest_version: 2,
-        name: 'Bet_Extansion_Chrome',
-        version: '1.0',
-        browser_action: {
-          default_icon: 'logo.png',
-          default_page: 'index.html'
-        },
-
-        permissions: [
-          'activeTab'
-        ]
-      }
-    })
+    new ManifestPlugin({})
   ]
 })
 
@@ -48,8 +34,8 @@ if (process.env.NODE_ENV === 'production') {
   ])
 } else {
   module.exports.plugins = (module.exports.plugins || []).concat([
-      new BundleAnalyzerPlugin({
-      analyzerPort: 9999
-    })
+    new BundleAnalyzerPlugin({
+        analyzerPort: 9999
+      })
   ])
 }

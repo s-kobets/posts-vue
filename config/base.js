@@ -11,13 +11,12 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    publicPath: '/',
+    // publicPath: '',
     filename: '[name].js'
   },
 
   plugins: [
     new HtmlPlugin({
-      title: 'Chrome Extension APP',
       filename: 'index.html',
       template: path.join(__dirname, '../index.html')
     }),
